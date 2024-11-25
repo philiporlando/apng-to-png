@@ -30,9 +30,7 @@ def extract_frames(apng_path: Path, output_folder: Path) -> None:
     try:
         apng = APNG.open(str(apng_path))
         frame_count = len(apng.frames)
-        padding_width = max(
-            3, len(str(frame_count))
-        )  # Dynamically calculate padding width
+        padding_width = max(3, len(str(frame_count)))
         logging.info(f"Found {frame_count} frames in '{apng_path.name}'")
 
         for i, (png, _control) in enumerate(
