@@ -12,9 +12,9 @@ def setup_logging():
     )
 
 
-def ensure_directory_exists(directory: Path) -> None:
-    """Ensure a directory exists, creating it if necessary."""
-    directory.mkdir(parents=True, exist_ok=True)
+def ensure_folder_exists(folder: Path) -> None:
+    """Ensure a folder exists, creating it if necessary."""
+    folder.mkdir(parents=True, exist_ok=True)
 
 
 def extract_frames(apng_path: Path, output_folder: Path) -> None:
@@ -25,7 +25,7 @@ def extract_frames(apng_path: Path, output_folder: Path) -> None:
         apng_path (Path): Path to the input APNG file.
         output_folder (Path): Path to the folder where extracted frames will be saved.
     """
-    ensure_directory_exists(output_folder)
+    ensure_folder_exists(output_folder)
 
     try:
         apng = APNG.open(str(apng_path))
@@ -46,20 +46,20 @@ def extract_frames(apng_path: Path, output_folder: Path) -> None:
         logging.error(f"Failed to process '{apng_path.name}': {e}")
 
 
-def process_apng_files(input_directory: Path, output_directory: Path) -> None:
+def process_apng_files(input_folder: Path, output_folder: Path) -> None:
     """
-    Process all APNG files in the input directory.
+    Process all APNG files in the input folder.
 
     Args:
-        input_directory (Path): Path to the directory containing APNG files.
-        output_directory (Path): Path to the directory where output will be saved.
+        input_folder (Path): Path to the folder containing APNG files.
+        output_folder (Path): Path to the folder where output will be saved.
     """
-    ensure_directory_exists(output_directory)
+    ensure_folder_exists(output_folder)
 
-    for file in input_directory.iterdir():
+    for file in input_folder.iterdir():
         if file.suffix.lower() == ".apng":
             folder_name = file.stem
-            folder_path = output_directory / folder_name
+            folder_path = output_folder / folder_name
             extract_frames(file, folder_path)
 
 
