@@ -1,0 +1,22 @@
+version = 1
+requires-python = ">=3.12"
+
+[[package]]
+name = "apng"
+version = "0.3.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/2b/fe/45f21b8a2236bf6079daf1fccde5c839b881192bb474f3a49ef9ae35e4be/apng-0.3.4.tar.gz", hash = "sha256:a3e4007fbadab2188ef80490bff4e75acc847158d22ec97176f6040ff76465ae", size = 8599 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/65/db/b3f4bf6cd1584e9f2ef903b7e3d1a4b209b98caccf336baa56da18e43e8f/apng-0.3.4-py2.py3-none-any.whl", hash = "sha256:6cb5d09d2c5cfd12226a13e64e731dcf94a399ba252d122309134a86ce14c942", size = 8172 },
+]
+
+[[package]]
+name = "apng-to-png"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "apng" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "apng", specifier = ">=0.3.4" }]
