@@ -8,3 +8,8 @@ dependencies = [
     "apng>=0.3.4",
     "tqdm>=4.67.1",
 ]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.3.3",
+]
