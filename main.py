@@ -1,12 +1,14 @@
 import logging
 from pathlib import Path
 from apng import APNG
+from tqdm import tqdm
 
 
 def setup_logging():
     """Set up logging configuration."""
     logging.basicConfig(
-        level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
     )
 
 
@@ -27,11 +29,21 @@ def extract_frames(apng_path: Path, output_folder: Path) -> None:
 
     try:
         apng = APNG.open(str(apng_path))
-        for i, (png, control) in enumerate(apng.frames):
-            output_png_path = output_folder / f"frame_{i:03}.png"
+        frame_count = len(apng.frames)
+        padding_width = max(
+            3, len(str(frame_count))
+        )  # Dynamically calculate padding width
+        logging.info(f"Found {frame_count} frames in '{apng_path.name}'")
+
+        for i, (png, _control) in enumerate(
+            tqdm(apng.frames, desc=f"Processing {apng_path.name}")
+        ):
+            output_png_path = output_folder / f"frame_{i:0{padding_width}}.png"
             with open(output_png_path, "wb") as f:
                 f.write(png.to_bytes())
-        logging.info(f"Extracted frames from '{apng_path.name}' into '{output_folder}'")
+        logging.info(
+            f"Extracted {frame_count} frames from '{apng_path.name}' into '{output_folder}'"
+        )
     except Exception as e:
         logging.error(f"Failed to process '{apng_path.name}': {e}")
 
@@ -58,6 +70,7 @@ def main():
     input_dir = Path("./data/input")
     output_dir = Path("./data/output")
 
+    logging.info(f"Starting APNG extraction from {input_dir} to {output_dir}")
     process_apng_files(input_dir, output_dir)
 
 
