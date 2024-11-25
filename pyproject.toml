@@ -4,12 +4,7 @@ version = "0.1.0"
 description = "Extract PNG frames from APNG files"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "apng>=0.3.4",
-    "tqdm>=4.67.1",
-]
+dependencies = ["apng>=0.3.4", "tqdm>=4.67.1"]
 
 [tool.uv]
-dev-dependencies = [
-    "pytest>=8.3.3",
-]
+dev-dependencies = ["pytest>=8.3.3"]
