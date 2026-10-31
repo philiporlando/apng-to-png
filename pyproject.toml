@@ -6,5 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = ["apng>=0.3.4", "tqdm>=4.67.1"]
 
-[tool.uv]
-dev-dependencies = ["pytest>=8.3.3"]
+[dependency-groups]
+dev = ["pytest>=9.0.3"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
